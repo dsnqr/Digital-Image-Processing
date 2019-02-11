@@ -3,8 +3,8 @@ img = imread('goldhill256.bmp');
 k = 1;
 l = 1;
 f = 2;
-k = 1;
-l = 1;
+% k = 1;
+% l = 1;
 %% Converting image to double the orignal size
 zoom = zeros(m*f,n*f);
 for i = 1:m
@@ -24,7 +24,7 @@ r = conv2(zoom,h3,'valid'); %Cubic Spline Interpolation
 %% Displaying Images
 figure(1);
 imshow(img,[])
-title('Orignal Image');
+title('Orignal');
 figure(2)
 imshow(uint8(r));
-title('Zooming using Cubic Spline Interpolator');
+title('Zoomed');
