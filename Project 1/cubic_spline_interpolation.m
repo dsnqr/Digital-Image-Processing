@@ -23,7 +23,7 @@ h3 = 0.25*conv2(h2,H);
 r = conv2(zoom,h3,'valid'); %Cubic Spline Interpolation
 %% Displaying Images
 figure(1);
-imshow(img,[])
+imshow(img)
 title('Orignal');
 figure(2)
 imshow(uint8(r));
