@@ -1,0 +1,80 @@
+5:03 AM 2/22/2013
+----------------------------
+Uniform Quantizer:
+
+1) read the image
+2) note about the difference in uint8 and double.
+===========================
+when you read image from "imread" it's in unit8 format for saving disk space.  but calculations are done in floating point inside matlab for many image operations.
+ so trick is to first convert the int value in floating point. since calculations might go correct but matlab internlly works in floating point for various packages ( like LAPACK for linear equation solver, FFTW for fourier transform) that actively uses floating point. again when you use "imshow" it needs an integer type. reason not to do this leads to a white space image;
+so I= imread ('imagename.bmp') >>>  I is uint8 type.. make it double for calculation purposes double(I), then just before show make I as integer using unit8(I).
+
+btw as a trivia: matlab still has grand daddy fortran "traces" in it as it was originally created from it around late 70's
+==============================
+3) assign number of levels L = 32 ( 64,128)
+
+4) set range of Image as 0 - 256
+
+5) find q= (upper range-lower range)/L
+
+6) find t(k) and r(k)
+
+LOOP THIS STEP
+7) now find the output image. if the image pixel value [I(i,j)] is in the limits [t(k), t(k+1)] then output image pixel value should be r(k) else chuck it.
+
+END  OF LOOP
+
+8) Calculate MSE by taking difference of  initial image I-output image from (7) . then take sum it and take mean.
+
+ MSE should be read in reverse " calculate E ( error) then sum (S) then mean (M)
+
+9) similarly PSNR.
+
+-------------------------------------
+3:10 PM 2/22/2013
+
+Contrast quantizer
+
+1) take step  (1) , (2) , (3), (4) from above
+
+2) take the image from spatial/ luminance domain to contrast domain. the image by default is in spatial domain.
+use (4.65) for this. note there c is a matrix.
+c= alpha*U^(beta). here U is image matrix, multiplied by scalar alpha, then raise the power by another scalar beta.
+now take a pause and think:
+WHY this formula ?
+reason is simple kernel theory. in normal spatial domain, the image have some dimension. when we want to incrase the "dimension" of we "upscale" it and the way to do it is exponential raise to the power of some scalar or vector quantity. now here it is 'u' instead of exponential.
+
+Why we increase the dimension ?
+ well, sometime it is related to linear separability in high dimension, in our case it is justified by sayin that visual senstivity can be observed in this high "contrast" dimension.   Interested more: read cover's theorem, Neural Netowork, Haykin.
+
+don't confuse this dimension here with the "dimension of image" that still remain the same. what i mean by dimension here is the "space" in which you work like spatial space, time space, non linear space etc.
+
+3)  so the "c" still has same dimension as read image. . now with this new modified image"c" perform uniform quantization. USE your first part code. Everything is same except the input now "c" AND NOT the read Image.
+
+4) so we did (3) in contrast space. now we have to come back to luminance space. simple.
+make U as the function of the formula (4.65)
+
+5) again calculate MSE and PSNR as in first part.
+
+---------------------------
+6:10 PM 2/22/2013
+Pseudorandom quantizer
+
+1) again take step (1) from uniform quantizer.  to have value of A, take some fraction of step size "q".
+2) generate "pesudorandom noise". simply use randn with certain limits of [-A, A]  see help of randn for this, else Pavithra gave one trick which i shared in my last email.
+3) add this noise to image read in step (1)
+4) quantize this noisy image using 3-bit quantizer ( see below as to how to make it )
+5) now we have quantized image from step (4), subtract it from the noise you generate in step (2).
+6) now use the output image from step 5) to calculate MSE and PSNR.
+-------------
+How to make a 3 bit quantizer ?
+This is a classic problem
+	a) take number of bits N = 3
+	b) obtain shifted image. use command "bitshift" to mask the last 8-3=5 values.  take help from "bitshift" command.
+	c) now boolean "AND" using "bitand" the original Image and the shifted image from (b).
+
+ WHY we do quantization step ?
+Quantization has deep connection with embedded ( which in turn is "brother" of communication theory). from embedded point of view, imagine this as a simple masking some bits from a 8 bit register and then AND it with original 8 bit register to get the "word" required for PIC to perform the operation. note this is just an analogy NOT the real operation.
+
+
+	
