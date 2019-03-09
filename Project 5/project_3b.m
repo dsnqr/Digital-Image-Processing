@@ -27,6 +27,7 @@ I(:,:,3) = B_img_raw;
 figure
 imshow(uint8(I))
 title('RAW Image')
+saveas(gca,'RAW_image','jpg');
 
 %% For the first problem, we deploy the following algorithm
 
@@ -63,6 +64,7 @@ title('Q Component')
 figure 
 imshow(YIQ_img)
 title('YIQ color space image')
+saveas(gca,'YIQ_components','jpg');
 
 %% Reconstructing RGB from the YIQ components
 
@@ -92,9 +94,11 @@ title('G Component(Recon)')
 subplot(1,3,3)
 imshow(uint8(recon_img(:,:,3)))
 title('B Component(Recon)')
+saveas(gca,'Recon_RGB_YIQ','jpg');
 %% Displaying Reconstructed Image
 
 figure
 imshow(uint8(recon_img))
 title('Reconstructed Image')
+saveas(gca,'Recon_1','jpg');
 
