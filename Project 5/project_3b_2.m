@@ -15,7 +15,7 @@ Co = double(0.5*img(:,:,1)-0.5*img(:,:,3));                   % Co component
 
 figure,imshow(img)
 title('Orignal Image')
-
+saveas(gca,'original_image','jpg');
 %% Displaying the YCgCo components
 
 figure,subplot(1,3,1)
@@ -27,6 +27,7 @@ title('C_g Component')
 subplot(1,3,3)
 imshow(uint8(Co))
 title('C_o Component')
+saveas(gca,'YCgCo components','jpg');
 
 %% For problem 4 we do the inverse conversion from YCgCo to RGB
 
@@ -48,7 +49,7 @@ title('Recon_G')
 subplot(1,3,3)
 imshow(uint8(B))
 title('Recon_B')
-
+saveas(gca,'Recon_RGB_YCgCo','jpg');
 %% Reconstructing the image
 
 I = zeros(size(img));
@@ -61,3 +62,4 @@ I(:,:,3) = B;
 figure
 imshow(uint8(I))
 title('Reconstructed Image')
+saveas(gca,'Recon_2','jpg');
