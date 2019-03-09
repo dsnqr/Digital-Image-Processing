@@ -61,10 +61,11 @@ title('I Component')
 subplot(1,3,3)
 imshow(YIQ_img(:,:,3))
 title('Q Component')
+saveas(gca,'YIQ_components','jpg');
 figure 
 imshow(YIQ_img)
 title('YIQ color space image')
-saveas(gca,'YIQ_components','jpg');
+saveas(gca,'YIQ image','jpg');
 
 %% Reconstructing RGB from the YIQ components
 
