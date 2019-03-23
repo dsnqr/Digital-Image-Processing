@@ -44,8 +44,8 @@ saveas(gca,'l_hist.jpg');
 
 %% Direct Histogram (Straight Line)
 
-sl = linspace(0,1,512);
-d_hist_img = histeq(img,sl);
+st_l = linspace(0,1,512);
+d_hist_img = histeq(img,st_l);
 figure;
 subplot(1,2,1)
 imshow(d_hist_img);
@@ -93,8 +93,8 @@ saveas(gca,'l_hist_2.jpg');
 
 %% Direct Histogram (Straight Line)
 
-sl = linspace(0,1,512);
-d_hist_img2 = histeq(img2,sl);
+st_l = linspace(0,1,512);
+d_hist_img2 = histeq(img2,st_l);
 figure;
 subplot(1,2,1)
 imshow(d_hist_img2);
