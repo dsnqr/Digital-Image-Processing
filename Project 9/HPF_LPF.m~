@@ -114,12 +114,10 @@ axis tight;
 hold on;
 saveas(gca,'Gaussian_LPF_3D.jpg');
 
-%% Display Gaussian LPF
-
+%% 
 figure
 imshow(gaussian_LPF);
 title('Gaussian LPF')
-saveas(gca,'G_LPF.jpg');
 gaussianLP_transform = fft2(gaussian_LPF);
 gaussianLP_transform = fftshift(gaussianLP_transform);
 
@@ -128,7 +126,6 @@ gaussianLP_transform = fftshift(gaussianLP_transform);
 figure
 imshow(gaussianLP_transform);
 title('Gaussian LPF transform');
-saveas(gca,'G_LPF_img.jpg');
 
 % %% Gaussian High Pass Filter
 % sigma = 16;
