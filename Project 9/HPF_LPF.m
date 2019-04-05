@@ -130,34 +130,47 @@ imshow(gaussianLP_transform);
 title('Gaussian LPF transform');
 saveas(gca,'G_LPF_img.jpg');
 
-% %% Gaussian High Pass Filter
-% sigma = 16;
-% gaussian_HP = zeros(512,512);
-% for k=1:1:size
-% for l=1:1:size
-% gaussian_HP(k,l) = 1-exp(-((k-(size/2))^2+(l-
-% (size/2))^2)/(2*sigma^2));
-% end
-% end
-% figure
-% surf(gaussian_HP, 'EdgeColor', 'none');
-% xlabel('Spatial freq l');
-% ylabel('Spatial freq k');
-% zlabel('Amplitude g');
-% colormap(hsv);
-% shading interp;
-% alpha(0.7);
-% grid on;
-% axis tight;
-% hold on;
-% figure
-% imshow(gaussian_HP);
-% title('Gaussian HP');
-% gaussianHP_transform = fft2(gaussian_HP);
-% gaussianHP_transform = fftshift(gaussianHP_transform);
-% figure
-% imshow(gaussianHP_transform);
-% title('Gaussian HP transform');
+%% Algorithm for Gaussian High Pass Filter
+sigma = 16;
+gaussian_HPF = zeros(512,512);
+for k=1:1:size
+for l=1:1:size
+gaussian_HPF(k,l) = 1-exp(-((k-(size/2))^2+(l-(size/2))^2)/(2*sigma^2));
+end
+end
+
+%% Display 3D plot of Gaussian HPF
+
+figure
+surf(gaussian_HPF, 'EdgeColor', 'none');
+xlabel('Spatial freq l');
+ylabel('Spatial freq k');
+zlabel('Amplitude g');
+colormap(hsv);
+shading interp;
+alpha(0.7);
+grid on;
+axis tight;
+hold on;
+saveas(gca,'Gaussian_HPF_3D.jpg');
+
+%% Dispaly Gaussian HPF
+
+figure
+imshow(gaussian_HPF);
+title('Gaussian HP');
+saveas(gca,'G_HPF.jpg');
+gaussianHP_transform = fft2(gaussian_HPF);
+gaussianHP_transform = fftshift(gaussianHP_transform);
+
+%% Plotting the results of Gaussian HPF on the image
+
+figure
+imshow(gaussianHP_transform);
+title('Gaussian HP transform');
+saveas(gca,'G_HPF_img.jpg');
+
+
 % %% Algorithm for Butterworth Low Pass Filter
 % Butterworth_LP = zeros(512,512);
 % n = 3;d0 = 40;
