@@ -80,7 +80,7 @@ ifft_img_g_LPF = real(ifft2(img_dft_g_LPF));
 figure();
 subplot(1,2,1);
 imshow(log(1+abs(fftshift(img_dft_g_LPF))),[]);
-title('GAUSSIAN LOW PASS filtered frequency response of image');
+title('GAUSSIAN LOW PASS freq response');
 subplot(1,2,2);
 imshow(ifft_img_g_LPF,[]);
 title('GAUSSIAN LOW PASS filtered image');
@@ -94,7 +94,7 @@ ifft_img_g_HPF = real(ifft2(img_dft_g_HPF));
 figure();
 subplot(1,2,1);
 imshow(log(1+abs(fftshift(img_dft_g_HPF))),[]);
-title('GAUSSIAN HIGH PASS filtered frequency response image');
+title('GAUSSIAN HIGH PASS freq response');
 subplot(1,2,2);
 imshow(ifft_img_g_HPF,[]);
 title('GAUSSIAN HIGHPASS filtered image');
@@ -108,10 +108,10 @@ ifft_img_b_LPF = real(ifft2(img_dft_b_LPF));
 figure();
 subplot(1,2,1);
 imshow(log(1+abs(fftshift(img_dft_b_LPF))),[]);
-title('BUTTERWORTH LOW PASS filtered frequency response image');
+title('BUTTERWORTH LPF freq response');
 subplot(1,2,2);
 imshow(ifft_img_b_LPF,[]);
-title('BUTTERWORTH LOW PASS filtered image');
+title('BUTTERWORTH LPF filtered image');
 saveas(gca,'b_LPF_img.jpg');
 
 %% Applying Butterworth HPF to image and plotting the results
@@ -121,10 +121,10 @@ ifft_img_b_HPF = real(ifft2(img_dft_b_HPF));
 figure();
 subplot(1,2,1);
 imshow(log(1+abs(fftshift(img_dft_b_HPF))),[]);
-title('BUTTERWORTH HIGH PASS filtered frequency response');
+title('BUTTERWORTH HPF freq response');
 subplot(1,2,2);
 imshow(ifft_img_b_HPF,[]);
-title('BUTTERWORTH HIGH PASS filtered image');
+title('BUTTERWORTH HPF filtered image');
 saveas(gca,'b_HPF_img.jpg');
 
 
