@@ -56,8 +56,7 @@ saveas(gca,'DFT_Original.jpg');
 % f_img = ifft2(LPF);
 % imshow(f_img);
 % title('f_img');
-m1 = 512;
-n1 = 512;
+
 uu = 0:(m1-1);
 vv = 0:(n1-1);
 ii = find(uu > m1/2);
